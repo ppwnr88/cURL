@@ -47,3 +47,11 @@ export interface HttpResponse {
   size: number;
   curlCommand: string;
 }
+
+export interface Tab {
+  id: string;
+  request: HttpRequest;
+  response: HttpResponse | null;
+  loading: boolean;
+  error: string | null;
+}
