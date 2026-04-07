@@ -166,6 +166,17 @@ async function executeHttpRequest(request: HttpRequest): Promise<HttpResponse> {
 
 // ─── Vercel handler ──────────────────────────────────────────────────────────
 
+function readBody(req: IncomingMessage): Promise<unknown> {
+  return new Promise((resolve, reject) => {
+    let raw = '';
+    req.on('data', (chunk: Buffer | string) => { raw += chunk.toString(); });
+    req.on('end', () => {
+      try { resolve(JSON.parse(raw)); } catch { resolve(null); }
+    });
+    req.on('error', reject);
+  });
+}
+
 export default async function handler(req: IncomingMessage & { body?: unknown }, res: ServerResponse) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
@@ -180,7 +191,7 @@ export default async function handler(req: IncomingMessage & { body?: unknown },
   }
 
   try {
-    const request = req.body as HttpRequest;
+    const request = (req.body ?? await readBody(req)) as HttpRequest;
 
     if (!request?.url?.trim()) {
       res.statusCode = 400;
