@@ -6,6 +6,8 @@ import { ImportCurlModal } from './components/ImportCurlModal';
 import { useRequest } from './hooks/useRequest';
 import type { HttpRequest, HttpMethod, KeyValuePair } from './types/index';
 
+type MobilePanel = 'request' | 'response';
+
 function newRow(): KeyValuePair {
   return { id: crypto.randomUUID(), key: '', value: '', enabled: true };
 }
@@ -31,6 +33,12 @@ export default function App() {
   const [request, setRequest] = useState<HttpRequest>(DEFAULT_REQUEST);
   const { response, loading, error, send } = useRequest();
   const [importModal, setImportModal] = useState<{ open: boolean; prefill?: string }>({ open: false });
+  const [mobilePanel, setMobilePanel] = useState<MobilePanel>('request');
+
+  // Auto-switch to response tab on mobile after a request completes
+  useEffect(() => {
+    if (!loading && (response || error)) setMobilePanel('response');
+  }, [loading, response, error]);
 
   const [splitPct, setSplitPct] = useState(44);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -95,7 +103,7 @@ export default function App() {
             <path d="M6 6.5 L9 4.5 L12 6.5 L12 11.5 L9 13.5 L6 11.5 Z" fill="white" opacity="0.9" />
           </svg>
           <span className="text-pm-text font-semibold text-[13px] tracking-tight">cURL UI</span>
-          <span className="text-pm-muted text-xs">HTTP Tester</span>
+          <span className="text-pm-muted text-xs hidden sm:inline">HTTP Tester</span>
         </div>
         <div className="flex items-center gap-1.5 text-xs text-pm-muted">
           <span className="w-1.5 h-1.5 rounded-full bg-green-500 inline-block" />
@@ -116,8 +124,41 @@ export default function App() {
         />
       </div>
 
-      {/* ── Split panels ────────────────────────────────────────────── */}
-      <div ref={containerRef} className="flex-1 flex flex-col min-h-0 overflow-hidden">
+      {/* ── Mobile: panel tab switcher ──────────────────────────────── */}
+      <div className="md:hidden flex flex-shrink-0 border-b border-pm-border bg-pm-panel">
+        {(['request', 'response'] as MobilePanel[]).map((panel) => (
+          <button
+            key={panel}
+            type="button"
+            onClick={() => setMobilePanel(panel)}
+            className={`
+              flex-1 flex items-center justify-center gap-1.5 py-2.5 text-xs font-medium capitalize
+              transition-colors select-none border-b-2 -mb-px
+              ${mobilePanel === panel
+                ? 'text-pm-text border-orange'
+                : 'text-pm-sub hover:text-pm-text border-transparent'
+              }
+            `}
+          >
+            {panel}
+            {panel === 'response' && (response || error) && (
+              <span className={`w-1.5 h-1.5 rounded-full ${error ? 'bg-red-400' : 'bg-green-500'}`} />
+            )}
+          </button>
+        ))}
+      </div>
+
+      {/* ── Mobile: single active panel ─────────────────────────────── */}
+      <div className="md:hidden flex-1 overflow-hidden min-h-0">
+        {mobilePanel === 'request' ? (
+          <RequestPanel request={request} onChange={setRequest} curlCommand={curlCommand} />
+        ) : (
+          <ResponsePanel response={response} loading={loading} error={error} />
+        )}
+      </div>
+
+      {/* ── Desktop: split panels ───────────────────────────────────── */}
+      <div ref={containerRef} className="hidden md:flex flex-1 flex-col min-h-0 overflow-hidden">
 
         {/* Request panel */}
         <div
@@ -137,7 +178,6 @@ export default function App() {
           className="flex-shrink-0 h-3 cursor-row-resize select-none flex items-center justify-center group transition-colors hover:bg-pm-hover active:bg-pm-active"
           style={{ background: '#1C1C1C', borderTop: '1px solid #464646', borderBottom: '1px solid #464646' }}
         >
-          {/* Grip dots */}
           <div className="flex items-center gap-[3px] opacity-40 group-hover:opacity-100 transition-opacity">
             {Array.from({ length: 6 }).map((_, i) => (
               <span key={i} className="w-[3px] h-[3px] rounded-full bg-pm-sub" />
@@ -147,11 +187,7 @@ export default function App() {
 
         {/* Response panel */}
         <div className="flex-1 overflow-hidden min-h-0">
-          <ResponsePanel
-            response={response}
-            loading={loading}
-            error={error}
-          />
+          <ResponsePanel response={response} loading={loading} error={error} />
         </div>
       </div>
 

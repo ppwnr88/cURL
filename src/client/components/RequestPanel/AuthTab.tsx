@@ -62,7 +62,7 @@ export function AuthTab({ auth, onChange }: Props) {
       )}
 
       {auth.type === 'basic' && (
-        <div className="flex gap-3">
+        <div className="flex flex-col sm:flex-row gap-3">
           <div className="flex-1">
             <label className={labelCls}>Username</label>
             <input type="text" value={auth.username ?? ''} onChange={(e) => onChange({ ...auth, username: e.target.value })} placeholder="username" className={inputCls} autoComplete="off" />
@@ -76,7 +76,7 @@ export function AuthTab({ auth, onChange }: Props) {
 
       {auth.type === 'apikey' && (
         <div className="space-y-3">
-          <div className="flex gap-3">
+          <div className="flex flex-col sm:flex-row gap-3">
             <div className="flex-1">
               <label className={labelCls}>Key Name</label>
               <input type="text" value={auth.apiKeyName ?? ''} onChange={(e) => onChange({ ...auth, apiKeyName: e.target.value })} placeholder="X-API-Key" className={inputCls} autoComplete="off" />

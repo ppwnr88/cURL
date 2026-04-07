@@ -26,70 +26,73 @@ export function UrlBar({ method, url, loading, onMethodChange, onUrlChange, onSe
   };
 
   return (
-    <div className="flex items-center gap-2 px-3 py-2.5">
+    <div className="flex flex-col gap-2 px-3 py-2.5 sm:flex-row sm:items-center">
 
-      {/* Method dropdown */}
-      <MethodSelect value={method} onChange={onMethodChange} />
+      {/* Row 1: Method + URL */}
+      <div className="flex items-center gap-2 flex-1 min-w-0">
+        <MethodSelect value={method} onChange={onMethodChange} />
+        <input
+          type="url"
+          value={url}
+          onChange={(e) => onUrlChange(e.target.value)}
+          onKeyDown={handleKeyDown}
+          onPaste={handlePaste}
+          placeholder="Enter URL or paste a curl command"
+          className="
+            flex-1 min-w-0 rounded px-3 py-1.5 text-sm text-pm-text placeholder-pm-muted
+            outline-none transition-colors font-mono
+            focus:border-orange hover:border-[#606060]
+          "
+          style={{ background: '#141414', border: '1.5px solid #505050' }}
+          autoComplete="off"
+          autoCorrect="off"
+          spellCheck={false}
+        />
+      </div>
 
-      {/* URL input */}
-      <input
-        type="url"
-        value={url}
-        onChange={(e) => onUrlChange(e.target.value)}
-        onKeyDown={handleKeyDown}
-        onPaste={handlePaste}
-        placeholder="Enter URL or paste a curl command"
-        className="
-          flex-1 rounded px-3 py-1.5 text-sm text-pm-text placeholder-pm-muted
-          outline-none transition-colors font-mono
-          focus:border-orange hover:border-[#606060]
-        "
-        style={{ background: '#141414', border: '1.5px solid #505050' }}
-        autoComplete="off"
-        autoCorrect="off"
-        spellCheck={false}
-      />
+      {/* Row 2 (mobile) / inline (sm+): Import + Send */}
+      <div className="flex items-center gap-2">
+        {/* Import cURL */}
+        <button
+          type="button"
+          onClick={() => onImportCurl()}
+          title="Import a curl command"
+          className="
+            flex-1 sm:flex-none flex items-center justify-center gap-1.5 px-3 py-1.5 rounded
+            text-pm-sub hover:text-pm-text text-xs font-medium
+            transition-colors whitespace-nowrap hover:brightness-125
+          "
+          style={{ background: '#141414', border: '1.5px solid #505050' }}
+        >
+          <svg width="12" height="12" viewBox="0 0 16 16" fill="none" className="flex-shrink-0">
+            <rect x="5" y="1" width="9" height="12" rx="1.5" stroke="currentColor" strokeWidth="1.4"/>
+            <path d="M5 4H3.5A1.5 1.5 0 0 0 2 5.5v9A1.5 1.5 0 0 0 3.5 16h7A1.5 1.5 0 0 0 12 14.5V13" stroke="currentColor" strokeWidth="1.4"/>
+          </svg>
+          Import cURL
+        </button>
 
-      {/* Import cURL */}
-      <button
-        type="button"
-        onClick={() => onImportCurl()}
-        title="Import a curl command"
-        className="
-          flex-shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded
-          text-pm-sub hover:text-pm-text text-xs font-medium
-          transition-colors whitespace-nowrap hover:brightness-125
-        "
-        style={{ background: '#141414', border: '1.5px solid #505050' }}
-      >
-        <svg width="12" height="12" viewBox="0 0 16 16" fill="none" className="flex-shrink-0">
-          <rect x="5" y="1" width="9" height="12" rx="1.5" stroke="currentColor" strokeWidth="1.4"/>
-          <path d="M5 4H3.5A1.5 1.5 0 0 0 2 5.5v9A1.5 1.5 0 0 0 3.5 16h7A1.5 1.5 0 0 0 12 14.5V13" stroke="currentColor" strokeWidth="1.4"/>
-        </svg>
-        Import cURL
-      </button>
-
-      {/* Send */}
-      <button
-        type="button"
-        onClick={onSend}
-        disabled={loading || !url.trim()}
-        style={{ background: '#2762F5' }}
-        className="
-          flex-shrink-0 flex items-center gap-2 px-4 py-1.5 rounded
-          disabled:opacity-50 disabled:cursor-not-allowed hover:brightness-110
-          text-white text-sm font-semibold transition-all
-        "
-      >
-        {loading ? (
-          <>
-            <span className="inline-block w-3.5 h-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-            <span>Sending</span>
-          </>
-        ) : (
-          'Send'
-        )}
-      </button>
+        {/* Send */}
+        <button
+          type="button"
+          onClick={onSend}
+          disabled={loading || !url.trim()}
+          style={{ background: '#2762F5' }}
+          className="
+            flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-1.5 rounded
+            disabled:opacity-50 disabled:cursor-not-allowed hover:brightness-110
+            text-white text-sm font-semibold transition-all
+          "
+        >
+          {loading ? (
+            <>
+              <span className="inline-block w-3.5 h-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+              <span>Sending</span>
+            </>
+          ) : (
+            'Send'
+          )}
+        </button>
+      </div>
     </div>
   );
 }

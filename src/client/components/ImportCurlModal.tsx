@@ -92,10 +92,10 @@ export function ImportCurlModal({ initialValue = '', onImport, onClose }: Props)
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/70"
+      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/70"
       onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
     >
-      <div className="w-full max-w-2xl mx-4 bg-pm-panel border border-pm-border rounded shadow-2xl flex flex-col">
+      <div className="w-full max-w-2xl sm:mx-4 bg-pm-panel sm:border border-pm-border sm:rounded shadow-2xl flex flex-col h-full sm:h-auto sm:max-h-[90vh] overflow-y-auto">
 
         {/* ── Header ──────────────────────────────────────────────── */}
         <div className="flex items-center justify-between px-5 py-4 border-b border-pm-border">
@@ -176,12 +176,12 @@ export function ImportCurlModal({ initialValue = '', onImport, onClose }: Props)
               onDrop={handleDrop}
               onClick={() => fileInputRef.current?.click()}
               style={dragging
-                ? { background: 'rgba(255,108,55,0.08)', border: '1.5px dashed #FF6C37', minHeight: '220px' }
-                : { background: '#141414', border: '1.5px dashed #505050', minHeight: '220px' }
+                ? { background: 'rgba(255,108,55,0.08)', border: '1.5px dashed #FF6C37', minHeight: '160px' }
+                : { background: '#141414', border: '1.5px dashed #505050', minHeight: '160px' }
               }
               className="flex flex-col items-center justify-center gap-4 rounded cursor-pointer transition-colors hover:border-[#606060] select-none"
             >
-              <div className="flex flex-col items-center justify-center gap-4 py-14">
+              <div className="flex flex-col items-center justify-center gap-4 py-8 sm:py-14">
                 {/* Upload icon */}
                 <div className="w-12 h-12 rounded-full flex items-center justify-center" style={{ background: 'rgba(255,108,55,0.1)' }}>
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FF6C37" strokeWidth="1.5">

@@ -288,8 +288,8 @@ export function ResponseBody({ body, contentType }: Props) {
 
       {/* ── Find bar ─────────────────────────────────────────── */}
       {searchOpen && (
-        <div className="flex items-center gap-2 px-3 py-2 bg-pm-panel border-b border-pm-line flex-shrink-0">
-          <div className="relative flex-1 max-w-sm">
+        <div className="flex flex-wrap items-center gap-2 px-3 py-2 bg-pm-panel border-b border-pm-line flex-shrink-0">
+          <div className="relative flex-1 min-w-[140px]">
             <input
               ref={searchInputRef}
               type="text"

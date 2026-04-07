@@ -71,18 +71,16 @@ export function ResponsePanel({ response, loading, error }: Props) {
 
         {/* Response meta */}
         {response && (
-          <div className="flex items-center gap-3 pr-3 text-xs">
+          <div className="flex items-center gap-2 sm:gap-3 pr-2 sm:pr-3 text-xs">
             <StatusBadge status={response.status} />
-            <span className="text-pm-sub">{response.statusText}</span>
-            <span className="text-pm-border">│</span>
+            <span className="text-pm-sub hidden sm:inline">{response.statusText}</span>
+            <span className="text-pm-border hidden sm:inline">│</span>
             <span>
               <span className="text-pm-text font-medium">{response.duration}</span>
               <span className="text-pm-muted"> ms</span>
             </span>
-            <span className="text-pm-border">│</span>
-            <span>
-              <span className="text-pm-text font-medium">{formatSize(response.size)}</span>
-            </span>
+            <span className="text-pm-border hidden sm:inline">│</span>
+            <span className="text-pm-text font-medium">{formatSize(response.size)}</span>
           </div>
         )}
       </div>
