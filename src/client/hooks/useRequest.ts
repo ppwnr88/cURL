@@ -19,7 +19,7 @@ export function useRequest(): UseRequestReturn {
     setResponse(null);
 
     try {
-      const apiUrl = import.meta.env.VITE_API_URL as string ?? 'http://localhost:3001';
+      const apiUrl = (import.meta.env.VITE_API_URL as string) || '';
       const res = await fetch(`${apiUrl}/api/execute`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
