@@ -170,13 +170,25 @@ export function ResponseBody({ body, contentType }: Props) {
     }
   }, [currentMatch, totalMatches, committedTerm, displayHtml]);
 
-  // Open search bar on Ctrl/Cmd+F
+  // Open search bar on Ctrl/Cmd+F; select all response text on Ctrl/Cmd+A
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if ((e.ctrlKey || e.metaKey) && e.key === 'f') {
         e.preventDefault();
         setSearchOpen(true);
         setTimeout(() => searchInputRef.current?.focus(), 30);
+      }
+      if ((e.ctrlKey || e.metaKey) && e.key === 'a') {
+        const tag = (e.target as HTMLElement)?.tagName?.toLowerCase();
+        if (tag === 'input' || tag === 'textarea' || (e.target as HTMLElement)?.isContentEditable) return;
+        if (!preRef.current) return;
+        e.preventDefault();
+        const sel = window.getSelection();
+        if (!sel) return;
+        const range = document.createRange();
+        range.selectNodeContents(preRef.current);
+        sel.removeAllRanges();
+        sel.addRange(range);
       }
     };
     window.addEventListener('keydown', onKey);
