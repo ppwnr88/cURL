@@ -1,5 +1,15 @@
 import { useState, useMemo, useEffect, useRef, useCallback } from 'react';
 
+function useCopyToClipboard(text: string) {
+  const [copied, setCopied] = useState(false);
+  const copy = useCallback(async () => {
+    await navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1500);
+  }, [text]);
+  return { copied, copy };
+}
+
 interface Props {
   body: string;
   contentType?: string;
@@ -117,6 +127,7 @@ export function ResponseBody({ body, contentType }: Props) {
   const canPretty = isJson || isJsonContent;
 
   const [mode, setMode] = useState<DisplayMode>('pretty');
+  const { copied, copy } = useCopyToClipboard(mode === 'pretty' && canPretty && pretty ? pretty : body);
 
   // Search state
   const [searchOpen, setSearchOpen] = useState(false);
@@ -277,6 +288,32 @@ export function ResponseBody({ body, contentType }: Props) {
           ))}
         </div>
 
+        <div className="flex items-center gap-1">
+        {/* Copy button */}
+        <button
+          type="button"
+          onClick={copy}
+          title="Copy response body"
+          className="flex items-center gap-1.5 px-2.5 py-1 rounded text-xs transition-colors text-pm-sub hover:text-pm-text hover:bg-pm-raised"
+        >
+          {copied ? (
+            <>
+              <svg width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.8">
+                <polyline points="2,8 6,12 14,4" />
+              </svg>
+              Copied
+            </>
+          ) : (
+            <>
+              <svg width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.8">
+                <rect x="5" y="5" width="9" height="9" rx="1.5" />
+                <path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2h-6A1.5 1.5 0 0 0 2 3.5v6A1.5 1.5 0 0 0 3.5 11H5" />
+              </svg>
+              Copy
+            </>
+          )}
+        </button>
+
         {/* Find toggle */}
         <button
           type="button"
@@ -296,6 +333,7 @@ export function ResponseBody({ body, contentType }: Props) {
           </svg>
           Find
         </button>
+        </div>
       </div>
 
       {/* ── Find bar ─────────────────────────────────────────── */}
