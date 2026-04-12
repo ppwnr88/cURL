@@ -197,6 +197,7 @@ export default function App() {
   const curlCommand = activeTab.response?.curlCommand ?? null;
 
   return (
+    <div>
     <div className="flex flex-col h-screen bg-pm-bg overflow-hidden">
 
       {/* ── Top bar ─────────────────────────────────────────────────── */}
@@ -321,6 +322,131 @@ export default function App() {
           onClose={() => setImportModal({ open: false })}
         />
       )}
+    </div>
+
+    {/* ── SEO content (below the fold) ─────────────────────────────── */}
+    <SeoContent />
+    </div>
+  );
+}
+
+function SeoContent() {
+  return (
+    <div className="bg-[#141414] text-pm-text" style={{ fontFamily: "'Inter', sans-serif" }}>
+
+      {/* Scroll hint */}
+      <div className="flex justify-center py-2 border-t border-pm-border">
+        <span className="text-pm-muted text-xs tracking-wide">▼ เรียนรู้เพิ่มเติมเกี่ยวกับ curl</span>
+      </div>
+
+      <div className="max-w-3xl mx-auto px-6 py-10 space-y-14">
+
+        {/* H1 hero */}
+        <section className="text-center space-y-3">
+          <h1 className="text-2xl sm:text-3xl font-bold leading-tight" style={{ color: '#FF6C37' }}>
+            cURL Online Tool ฟรี – สร้างและทดสอบคำสั่ง curl ได้ทันที
+          </h1>
+          <p className="text-pm-sub text-sm sm:text-base leading-relaxed">
+            ใช้งานเครื่องมือ curl online โดยไม่ต้องติดตั้งโปรแกรมใด ๆ รองรับทุก HTTP method,
+            Auth headers, Body payload และแสดง response แบบ real-time
+          </p>
+        </section>
+
+        {/* What is curl */}
+        <section className="space-y-4">
+          <h2 className="text-lg font-semibold border-b border-pm-border pb-2" style={{ color: '#FF6C37' }}>
+            curl คืออะไร?
+          </h2>
+          <p className="text-pm-sub text-sm leading-7">
+            <strong className="text-pm-text">curl</strong> (Client URL) คือ command-line tool
+            สำหรับส่ง HTTP request ไปยัง server โดยตรง ใช้กันอย่างแพร่หลายในหมู่นักพัฒนา
+            ซอฟต์แวร์เพื่อทดสอบ REST API, ดาวน์โหลดไฟล์, ส่งข้อมูล form และอีกมากมาย
+            curl รองรับ protocol หลายชนิด เช่น HTTP, HTTPS, FTP, SFTP และมีให้ใช้บน
+            ทุก platform ได้แก่ Linux, macOS และ Windows
+          </p>
+          <p className="text-pm-sub text-sm leading-7">
+            เครื่องมือ <strong className="text-pm-text">curl online</strong> นี้ช่วยให้คุณ
+            ทดสอบ HTTP request ได้ทันทีบน browser โดยไม่จำเป็นต้องเปิด terminal
+            เหมาะสำหรับผู้ที่เพิ่งเริ่มเรียน API และนักพัฒนาที่ต้องการทดสอบอย่างรวดเร็ว
+          </p>
+        </section>
+
+        {/* How to use */}
+        <section className="space-y-4">
+          <h2 className="text-lg font-semibold border-b border-pm-border pb-2" style={{ color: '#FF6C37' }}>
+            วิธีใช้งาน curl online tool
+          </h2>
+          <ol className="text-pm-sub text-sm leading-8 list-decimal list-inside space-y-1">
+            <li>เลือก <strong className="text-pm-text">HTTP Method</strong> (GET, POST, PUT, DELETE, PATCH ฯลฯ)</li>
+            <li>พิมพ์ <strong className="text-pm-text">URL</strong> ที่ต้องการส่ง request ในช่อง URL bar</li>
+            <li>เพิ่ม <strong className="text-pm-text">Query Params</strong> หรือ <strong className="text-pm-text">Headers</strong> ในแท็บที่เกี่ยวข้อง</li>
+            <li>ตั้งค่า <strong className="text-pm-text">Body</strong> — รองรับ raw JSON, form-data และ urlencoded</li>
+            <li>ตั้งค่า <strong className="text-pm-text">Auth</strong> — รองรับ Bearer Token, Basic Auth และ API Key</li>
+            <li>กดปุ่ม <strong className="text-pm-text">Send</strong> และดู response ทางด้านล่าง</li>
+          </ol>
+          <p className="text-pm-sub text-sm leading-7">
+            คุณยังสามารถ <strong className="text-pm-text">Import curl command</strong> จาก terminal
+            มาวางได้โดยตรง ระบบจะแปลงคำสั่งและกรอกข้อมูลให้อัตโนมัติ
+          </p>
+        </section>
+
+        {/* Example curl commands */}
+        <section className="space-y-4">
+          <h2 className="text-lg font-semibold border-b border-pm-border pb-2" style={{ color: '#FF6C37' }}>
+            ตัวอย่างคำสั่ง curl ที่ใช้บ่อย
+          </h2>
+
+          <div className="space-y-6">
+            <div>
+              <h3 className="text-sm font-medium text-pm-text mb-2">GET request พื้นฐาน</h3>
+              <pre className="rounded-md text-xs leading-6 overflow-x-auto p-4" style={{ background: '#1C1C1C', color: '#CE9178', fontFamily: "'JetBrains Mono', monospace" }}>
+{`curl https://api.example.com`}
+              </pre>
+            </div>
+
+            <div>
+              <h3 className="text-sm font-medium text-pm-text mb-2">POST พร้อม JSON body</h3>
+              <pre className="rounded-md text-xs leading-6 overflow-x-auto p-4" style={{ background: '#1C1C1C', color: '#CE9178', fontFamily: "'JetBrains Mono', monospace" }}>
+{`curl -X POST https://api.example.com \\
+  -H "Content-Type: application/json" \\
+  -d '{"name": "curl online", "status": "active"}'`}
+              </pre>
+            </div>
+
+            <div>
+              <h3 className="text-sm font-medium text-pm-text mb-2">ส่ง Bearer Token สำหรับ Authentication</h3>
+              <pre className="rounded-md text-xs leading-6 overflow-x-auto p-4" style={{ background: '#1C1C1C', color: '#CE9178', fontFamily: "'JetBrains Mono', monospace" }}>
+{`curl -X GET https://api.example.com/profile \\
+  -H "Authorization: Bearer YOUR_TOKEN_HERE"`}
+              </pre>
+            </div>
+
+            <div>
+              <h3 className="text-sm font-medium text-pm-text mb-2">PUT เพื่ออัปเดตข้อมูล</h3>
+              <pre className="rounded-md text-xs leading-6 overflow-x-auto p-4" style={{ background: '#1C1C1C', color: '#CE9178', fontFamily: "'JetBrains Mono', monospace" }}>
+{`curl -X PUT https://api.example.com/items/1 \\
+  -H "Content-Type: application/json" \\
+  -d '{"name": "updated name"}'`}
+              </pre>
+            </div>
+
+            <div>
+              <h3 className="text-sm font-medium text-pm-text mb-2">DELETE request</h3>
+              <pre className="rounded-md text-xs leading-6 overflow-x-auto p-4" style={{ background: '#1C1C1C', color: '#CE9178', fontFamily: "'JetBrains Mono', monospace" }}>
+{`curl -X DELETE https://api.example.com/items/1 \\
+  -H "Authorization: Bearer YOUR_TOKEN_HERE"`}
+              </pre>
+            </div>
+          </div>
+        </section>
+
+        {/* Footer */}
+        <footer className="border-t border-pm-border pt-6 text-center text-xs text-pm-muted">
+          <p>cURL Online Tool — ฟรี ไม่ต้องสมัครสมาชิก ใช้งานได้ทันที</p>
+          <p className="mt-1">© {new Date().getFullYear()} curl.wannarat.cc</p>
+        </footer>
+
+      </div>
     </div>
   );
 }
