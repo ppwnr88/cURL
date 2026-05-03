@@ -87,7 +87,6 @@ export function ImportCurlModal({ initialValue = '', onImport, onClose }: Props)
     }
   };
 
-  const inputStyle = { background: '#141414', border: '1.5px solid #505050' };
   const isMac = navigator.platform.includes('Mac');
 
   return (
@@ -142,7 +141,7 @@ export function ImportCurlModal({ initialValue = '', onImport, onClose }: Props)
             <>
               {fileName && (
                 <div className="flex items-center gap-2 mb-3 px-3 py-2 rounded bg-orange/10 border border-orange/25">
-                  <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="#FF6C37" strokeWidth="1.5">
+                  <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5">
                     <path d="M4 1h5l4 4v10H4V1z"/><polyline points="9,1 9,5 13,5"/>
                   </svg>
                   <span className="text-xs text-orange font-medium">{fileName}</span>
@@ -162,8 +161,11 @@ export function ImportCurlModal({ initialValue = '', onImport, onClose }: Props)
                 placeholder={`curl -X POST 'https://api.example.com/data' \\\n  -H 'Content-Type: application/json' \\\n  -d '{"key": "value"}'`}
                 rows={10}
                 spellCheck={false}
-                style={error ? { background: '#141414', border: '1.5px solid #7f1d1d' } : inputStyle}
-                className="w-full rounded px-4 py-3 text-xs text-pm-text placeholder-pm-muted font-mono leading-relaxed resize-none outline-none transition-colors focus:border-orange"
+                className={`
+                  w-full rounded px-4 py-3 text-xs text-pm-text placeholder-pm-muted font-mono
+                  leading-relaxed resize-none outline-none transition-colors bg-pm-bg border-[1.5px]
+                  ${error ? 'border-red-900 focus:border-red-500' : 'border-pm-border focus:border-orange hover:border-pm-active'}
+                `}
               />
             </>
           )}
@@ -175,16 +177,17 @@ export function ImportCurlModal({ initialValue = '', onImport, onClose }: Props)
               onDragLeave={handleDragLeave}
               onDrop={handleDrop}
               onClick={() => fileInputRef.current?.click()}
-              style={dragging
-                ? { background: 'rgba(255,108,55,0.08)', border: '1.5px dashed #FF6C37', minHeight: '160px' }
-                : { background: '#141414', border: '1.5px dashed #505050', minHeight: '160px' }
-              }
-              className="flex flex-col items-center justify-center gap-4 rounded cursor-pointer transition-colors hover:border-[#606060] select-none"
+              style={{ minHeight: '160px' }}
+              className={`
+                flex flex-col items-center justify-center gap-4 rounded cursor-pointer select-none
+                transition-colors bg-pm-bg border-[1.5px] border-dashed hover:border-pm-active
+                ${dragging ? 'border-orange bg-orange/10' : 'border-pm-border'}
+              `}
             >
               <div className="flex flex-col items-center justify-center gap-4 py-8 sm:py-14">
                 {/* Upload icon */}
-                <div className="w-12 h-12 rounded-full flex items-center justify-center" style={{ background: 'rgba(255,108,55,0.1)' }}>
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FF6C37" strokeWidth="1.5">
+                <div className="w-12 h-12 rounded-full flex items-center justify-center bg-orange/10 text-orange">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                     <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
                     <polyline points="17 8 12 3 7 8"/>
                     <line x1="12" y1="3" x2="12" y2="15"/>

@@ -201,17 +201,21 @@ export default function App() {
     <div className="flex flex-col h-screen bg-pm-bg overflow-hidden">
 
       {/* ── Top bar ─────────────────────────────────────────────────── */}
-      <header className="flex items-center justify-between px-4 h-10 bg-pm-panel border-b border-pm-border flex-shrink-0">
-        <div className="flex items-center gap-2.5">
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-            <circle cx="9" cy="9" r="8.5" fill="#FF6C37" />
-            <path d="M6 6.5 L9 4.5 L12 6.5 L12 11.5 L9 13.5 L6 11.5 Z" fill="white" opacity="0.9" />
-          </svg>
-          <span className="text-pm-text font-semibold text-[13px] tracking-tight">cURL UI</span>
-          <span className="text-pm-muted text-xs hidden sm:inline">HTTP Tester</span>
+      <header className="flex items-center justify-between px-4 h-11 bg-pm-panel border-b border-pm-border flex-shrink-0 shadow-[0_1px_0_rgba(255,255,255,0.04)_inset]">
+        <div className="flex items-center gap-3 min-w-0">
+          <div className="hidden sm:flex items-center gap-1.5 pr-1.5">
+            <span className="w-3 h-3 rounded-full bg-[#FF5F57] shadow-[0_0_0_1px_rgba(0,0,0,0.35)]" />
+            <span className="w-3 h-3 rounded-full bg-[#FEBC2E] shadow-[0_0_0_1px_rgba(0,0,0,0.35)]" />
+            <span className="w-3 h-3 rounded-full bg-[#28C840] shadow-[0_0_0_1px_rgba(0,0,0,0.35)]" />
+          </div>
+          <div className="flex h-6 w-6 items-center justify-center rounded-md bg-pm-raised border border-pm-border text-orange font-mono text-[13px] font-bold shadow-[0_0_18px_rgba(90,200,250,0.12)]">
+            $
+          </div>
+          <span className="text-pm-text font-semibold text-[13px] truncate">cURL UI</span>
+          <span className="text-pm-muted text-xs hidden sm:inline font-mono">~/http-tester</span>
         </div>
-        <div className="flex items-center gap-1.5 text-xs text-pm-muted">
-          <span className="w-1.5 h-1.5 rounded-full bg-green-500 inline-block" />
+        <div className="flex items-center gap-1.5 text-xs text-pm-muted font-mono">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#35D07F] inline-block shadow-[0_0_10px_rgba(53,208,127,0.55)]" />
           <span>Ready</span>
         </div>
       </header>
@@ -295,7 +299,7 @@ export default function App() {
         <div
           onMouseDown={handleMouseDown}
           className="flex-shrink-0 h-3 cursor-row-resize select-none flex items-center justify-center group transition-colors hover:bg-pm-hover active:bg-pm-active"
-          style={{ background: '#1C1C1C', borderTop: '1px solid #464646', borderBottom: '1px solid #464646' }}
+          style={{ background: '#0B0D10', borderTop: '1px solid #303744', borderBottom: '1px solid #303744' }}
         >
           <div className="flex items-center gap-[3px] opacity-40 group-hover:opacity-100 transition-opacity">
             {Array.from({ length: 6 }).map((_, i) => (
@@ -332,7 +336,7 @@ export default function App() {
 
 function SeoContent() {
   return (
-    <div className="bg-[#141414] text-pm-text" style={{ fontFamily: "'Inter', sans-serif" }}>
+    <div className="bg-pm-bg text-pm-text">
 
       {/* Scroll hint */}
       <div className="flex justify-center py-2 border-t border-pm-border">
@@ -343,7 +347,7 @@ function SeoContent() {
 
         {/* H1 hero */}
         <section className="text-center space-y-3">
-          <h1 className="text-2xl sm:text-3xl font-bold leading-tight" style={{ color: '#FF6C37' }}>
+          <h1 className="text-2xl sm:text-3xl font-bold leading-tight text-orange">
             cURL Online Tool ฟรี – สร้างและทดสอบคำสั่ง curl ได้ทันที
           </h1>
           <p className="text-pm-sub text-sm sm:text-base leading-relaxed">
@@ -354,7 +358,7 @@ function SeoContent() {
 
         {/* What is curl */}
         <section className="space-y-4">
-          <h2 className="text-lg font-semibold border-b border-pm-border pb-2" style={{ color: '#FF6C37' }}>
+          <h2 className="text-lg font-semibold border-b border-pm-border pb-2 text-orange">
             curl คืออะไร?
           </h2>
           <p className="text-pm-sub text-sm leading-7">
@@ -373,7 +377,7 @@ function SeoContent() {
 
         {/* How to use */}
         <section className="space-y-4">
-          <h2 className="text-lg font-semibold border-b border-pm-border pb-2" style={{ color: '#FF6C37' }}>
+          <h2 className="text-lg font-semibold border-b border-pm-border pb-2 text-orange">
             วิธีใช้งาน curl online tool
           </h2>
           <ol className="text-pm-sub text-sm leading-8 list-decimal list-inside space-y-1">
@@ -392,21 +396,21 @@ function SeoContent() {
 
         {/* Example curl commands */}
         <section className="space-y-4">
-          <h2 className="text-lg font-semibold border-b border-pm-border pb-2" style={{ color: '#FF6C37' }}>
+          <h2 className="text-lg font-semibold border-b border-pm-border pb-2 text-orange">
             ตัวอย่างคำสั่ง curl ที่ใช้บ่อย
           </h2>
 
           <div className="space-y-6">
             <div>
               <h3 className="text-sm font-medium text-pm-text mb-2">GET request พื้นฐาน</h3>
-              <pre className="rounded-md text-xs leading-6 overflow-x-auto p-4" style={{ background: '#1C1C1C', color: '#CE9178', fontFamily: "'JetBrains Mono', monospace" }}>
+              <pre className="rounded-md text-xs leading-6 overflow-x-auto p-4 bg-pm-raised text-[#FFD166] font-mono">
 {`curl https://api.example.com`}
               </pre>
             </div>
 
             <div>
               <h3 className="text-sm font-medium text-pm-text mb-2">POST พร้อม JSON body</h3>
-              <pre className="rounded-md text-xs leading-6 overflow-x-auto p-4" style={{ background: '#1C1C1C', color: '#CE9178', fontFamily: "'JetBrains Mono', monospace" }}>
+              <pre className="rounded-md text-xs leading-6 overflow-x-auto p-4 bg-pm-raised text-[#FFD166] font-mono">
 {`curl -X POST https://api.example.com \\
   -H "Content-Type: application/json" \\
   -d '{"name": "curl online", "status": "active"}'`}
@@ -415,7 +419,7 @@ function SeoContent() {
 
             <div>
               <h3 className="text-sm font-medium text-pm-text mb-2">ส่ง Bearer Token สำหรับ Authentication</h3>
-              <pre className="rounded-md text-xs leading-6 overflow-x-auto p-4" style={{ background: '#1C1C1C', color: '#CE9178', fontFamily: "'JetBrains Mono', monospace" }}>
+              <pre className="rounded-md text-xs leading-6 overflow-x-auto p-4 bg-pm-raised text-[#FFD166] font-mono">
 {`curl -X GET https://api.example.com/profile \\
   -H "Authorization: Bearer YOUR_TOKEN_HERE"`}
               </pre>
@@ -423,7 +427,7 @@ function SeoContent() {
 
             <div>
               <h3 className="text-sm font-medium text-pm-text mb-2">PUT เพื่ออัปเดตข้อมูล</h3>
-              <pre className="rounded-md text-xs leading-6 overflow-x-auto p-4" style={{ background: '#1C1C1C', color: '#CE9178', fontFamily: "'JetBrains Mono', monospace" }}>
+              <pre className="rounded-md text-xs leading-6 overflow-x-auto p-4 bg-pm-raised text-[#FFD166] font-mono">
 {`curl -X PUT https://api.example.com/items/1 \\
   -H "Content-Type: application/json" \\
   -d '{"name": "updated name"}'`}
@@ -432,7 +436,7 @@ function SeoContent() {
 
             <div>
               <h3 className="text-sm font-medium text-pm-text mb-2">DELETE request</h3>
-              <pre className="rounded-md text-xs leading-6 overflow-x-auto p-4" style={{ background: '#1C1C1C', color: '#CE9178', fontFamily: "'JetBrains Mono', monospace" }}>
+              <pre className="rounded-md text-xs leading-6 overflow-x-auto p-4 bg-pm-raised text-[#FFD166] font-mono">
 {`curl -X DELETE https://api.example.com/items/1 \\
   -H "Authorization: Bearer YOUR_TOKEN_HERE"`}
               </pre>

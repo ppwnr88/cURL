@@ -41,9 +41,9 @@ export function UrlBar({ method, url, loading, onMethodChange, onUrlChange, onSe
           className="
             flex-1 min-w-0 rounded px-3 py-1.5 text-sm text-pm-text placeholder-pm-muted
             outline-none transition-colors font-mono
-            focus:border-orange hover:border-[#606060]
+            bg-pm-bg border-[1.5px] border-pm-border
+            focus:border-orange hover:border-pm-active
           "
-          style={{ background: '#141414', border: '1.5px solid #505050' }}
           autoComplete="off"
           autoCorrect="off"
           spellCheck={false}
@@ -60,9 +60,8 @@ export function UrlBar({ method, url, loading, onMethodChange, onUrlChange, onSe
           className="
             flex-1 sm:flex-none flex items-center justify-center gap-1.5 px-3 py-1.5 rounded
             text-pm-sub hover:text-pm-text text-xs font-medium
-            transition-colors whitespace-nowrap hover:brightness-125
+            transition-colors whitespace-nowrap bg-pm-bg border-[1.5px] border-pm-border hover:border-pm-active
           "
-          style={{ background: '#141414', border: '1.5px solid #505050' }}
         >
           <svg width="12" height="12" viewBox="0 0 16 16" fill="none" className="flex-shrink-0">
             <rect x="5" y="1" width="9" height="12" rx="1.5" stroke="currentColor" strokeWidth="1.4"/>
@@ -76,11 +75,10 @@ export function UrlBar({ method, url, loading, onMethodChange, onUrlChange, onSe
           type="button"
           onClick={onSend}
           disabled={loading || !url.trim()}
-          style={{ background: '#2762F5' }}
           className="
             flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-1.5 rounded
             disabled:opacity-50 disabled:cursor-not-allowed hover:brightness-110
-            text-white text-sm font-semibold transition-all
+            bg-send hover:bg-send-hover text-white text-sm font-semibold transition-all
           "
         >
           {loading ? (

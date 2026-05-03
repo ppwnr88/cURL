@@ -4,13 +4,13 @@ import type { HttpMethod } from '../types/index';
 const METHODS: HttpMethod[] = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS'];
 
 const METHOD_STYLE: Record<HttpMethod, { text: string; selectedBg: string; dot: string }> = {
-  GET:     { text: '#49CC90', selectedBg: '#1a3326', dot: '#49CC90' },
-  POST:    { text: '#FCA130', selectedBg: '#332510', dot: '#FCA130' },
-  PUT:     { text: '#50A8FB', selectedBg: '#152236', dot: '#50A8FB' },
-  PATCH:   { text: '#C084FC', selectedBg: '#261a36', dot: '#C084FC' },
-  DELETE:  { text: '#F93E3E', selectedBg: '#361515', dot: '#F93E3E' },
-  HEAD:    { text: '#9B59B6', selectedBg: '#221530', dot: '#9B59B6' },
-  OPTIONS: { text: '#60A5FA', selectedBg: '#152236', dot: '#60A5FA' },
+  GET:     { text: '#35D07F', selectedBg: '#10261B', dot: '#35D07F' },
+  POST:    { text: '#FFD166', selectedBg: '#2C2411', dot: '#FFD166' },
+  PUT:     { text: '#5AC8FA', selectedBg: '#102331', dot: '#5AC8FA' },
+  PATCH:   { text: '#BF8BFF', selectedBg: '#251936', dot: '#BF8BFF' },
+  DELETE:  { text: '#FF5F57', selectedBg: '#311817', dot: '#FF5F57' },
+  HEAD:    { text: '#FF9F0A', selectedBg: '#2D210D', dot: '#FF9F0A' },
+  OPTIONS: { text: '#64D2FF', selectedBg: '#102331', dot: '#64D2FF' },
 };
 
 interface Props {
@@ -48,8 +48,8 @@ export function MethodSelect({ value, onChange }: Props) {
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        style={{ color: current.text, background: '#141414', border: '1.5px solid #505050' }}
-        className="flex items-center gap-1.5 pl-3 pr-2 py-1.5 rounded font-bold text-xs min-w-[86px] justify-between transition-colors hover:border-[#686868]"
+        style={{ color: current.text }}
+        className="flex items-center gap-1.5 pl-3 pr-2 py-1.5 rounded font-bold text-xs min-w-[86px] justify-between transition-colors bg-pm-bg border-[1.5px] border-pm-border hover:border-pm-active"
       >
         <span className="tracking-wide">{value}</span>
         <svg
@@ -78,7 +78,7 @@ export function MethodSelect({ value, onChange }: Props) {
                 onClick={() => { onChange(m); setOpen(false); }}
                 style={{
                   color: s.text,
-                  backgroundColor: isSelected ? s.selectedBg : '#252525',
+                  backgroundColor: isSelected ? s.selectedBg : '#111318',
                 }}
                 className="w-full flex items-center gap-2.5 px-3 py-2 text-xs font-bold text-left hover:bg-pm-hover transition-colors"
               >

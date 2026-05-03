@@ -347,13 +347,13 @@ export function ResponseBody({ body, contentType }: Props) {
               onChange={(e) => setSearchTerm(e.target.value)}
               onKeyDown={handleSearchKeyDown}
               placeholder="Type then press Enter or Find…"
-              style={{ background: '#141414', border: '1.5px solid #505050' }}
               className={`
                 w-full rounded px-3 py-1.5 text-xs font-mono
                 text-pm-text placeholder-pm-muted outline-none transition-colors pr-20
+                bg-pm-bg border-[1.5px]
                 ${committedTerm && totalMatches === 0
                   ? 'border-red-500/60 focus:border-red-500'
-                  : 'focus:border-orange hover:border-[#606060]'
+                  : 'border-pm-border focus:border-orange hover:border-pm-active'
                 }
               `}
             />

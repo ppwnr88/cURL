@@ -2,13 +2,13 @@ import React, { useRef, useEffect } from 'react';
 import type { Tab } from '../types/index';
 
 const METHOD_COLOR: Record<string, string> = {
-  GET:     '#49CC90',
-  POST:    '#FCA130',
-  PUT:     '#50A8FB',
-  PATCH:   '#C084FC',
-  DELETE:  '#F93E3E',
-  HEAD:    '#9B59B6',
-  OPTIONS: '#60A5FA',
+  GET:     '#35D07F',
+  POST:    '#FFD166',
+  PUT:     '#5AC8FA',
+  PATCH:   '#BF8BFF',
+  DELETE:  '#FF5F57',
+  HEAD:    '#FF9F0A',
+  OPTIONS: '#64D2FF',
 };
 
 function getTabLabel(tab: Tab): string {
@@ -78,7 +78,7 @@ export function TabBar({ tabs, activeTabId, onSwitch, onAdd, onClose }: Props) {
               {isActive && (
                 <span
                   className="absolute bottom-0 left-0 right-0 h-[2px]"
-                  style={{ background: '#FF6C37' }}
+                  style={{ background: '#5AC8FA' }}
                 />
               )}
 

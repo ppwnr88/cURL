@@ -19,11 +19,11 @@ function formatSize(bytes: number): string {
 
 function StatusBadge({ status }: { status: number }) {
   const color =
-    status >= 500                 ? '#F93E3E' :
-    status >= 400                 ? '#F93E3E' :
-    status >= 300 && status < 400 ? '#FCA130' :
-    status >= 200 && status < 300 ? '#49CC90' :
-                                    '#ABABAB';
+    status >= 500                 ? '#FF5F57' :
+    status >= 400                 ? '#FF5F57' :
+    status >= 300 && status < 400 ? '#FFD166' :
+    status >= 200 && status < 300 ? '#35D07F' :
+                                    '#A8B3C2';
   return (
     <span className="font-bold font-mono text-sm" style={{ color }}>{status}</span>
   );

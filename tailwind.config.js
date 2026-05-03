@@ -4,44 +4,43 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Postman gray palette
+        // iTerm-inspired graphite palette
         pm: {
-          bg:     '#1C1C1C',   // root background
-          panel:  '#252525',   // panels, headers, tab bars
-          raised: '#2D2D2D',   // inputs, dropdowns, elevated elements
-          hover:  '#363636',   // hover states
-          active: '#404040',   // pressed/selected
-          border: '#464646',   // default border (more visible than before)
-          line:   '#333333',   // subtle internal dividers
-          text:   '#E8E8E8',   // primary text
-          sub:    '#ABABAB',   // secondary text
-          muted:  '#686868',   // placeholder / disabled
+          bg:     '#0B0D10',   // root terminal background
+          panel:  '#111318',   // title bars, tab bars
+          raised: '#171A21',   // inputs, dropdowns, elevated elements
+          hover:  '#1D222B',   // hover states
+          active: '#242B36',   // pressed/selected
+          border: '#303744',   // default border
+          line:   '#202630',   // subtle internal dividers
+          text:   '#F3F6FA',   // primary text
+          sub:    '#A8B3C2',   // secondary text
+          muted:  '#667184',   // placeholder / disabled
         },
-        // Postman orange accent
+        // Accent token name is kept for existing classes; color is iTerm blue.
         orange: {
-          DEFAULT: '#FF6C37',
-          hover:   '#E8602F',
-          dim:     'rgba(255,108,55,0.12)',
+          DEFAULT: '#5AC8FA',
+          hover:   '#32ADE6',
+          dim:     'rgba(90,200,250,0.12)',
         },
-        // Postman Send button blue
         send: {
-          DEFAULT: '#2762F5',
-          hover:   '#1A52E0',
+          DEFAULT: '#0A84FF',
+          hover:   '#006EDB',
         },
-        // Method badge colours (Postman-accurate)
+        // Terminal-style method colours
         method: {
-          get:     '#49CC90',
-          post:    '#FCA130',
-          put:     '#50A8FB',
-          patch:   '#C084FC',
-          delete:  '#F93E3E',
-          head:    '#9B59B6',
-          options: '#60A5FA',
+          get:     '#35D07F',
+          post:    '#FFD166',
+          put:     '#5AC8FA',
+          patch:   '#BF8BFF',
+          delete:  '#FF5F57',
+          head:    '#FF9F0A',
+          options: '#64D2FF',
         },
       },
       fontFamily: {
-        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
-        mono: ['JetBrains Mono', 'Fira Code', 'Consolas', 'monospace'],
+        sans: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Cascadia Mono', 'Consolas', 'Liberation Mono', 'sans-serif'],
+        mono: ['SFMono-Regular', 'Menlo', 'Monaco', 'Cascadia Mono', 'Consolas', 'Liberation Mono', 'monospace'],
       },
     },
   },
